@@ -1,7 +1,9 @@
 # How to run AWE Electronics - Online
 
 Step 1: Clone this repository into the local system.
+
 Step 2: Navigate to the root project folder
+
 Step 3: Run this command:
 ```sh
 nodemon js/server.js
