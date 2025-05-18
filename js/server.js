@@ -27,6 +27,17 @@ app.get('/api/products/featured', (req, res) => {
     });
 });
 
+app.get('/api/product/:id', (req, res) => {
+    getAllProducts((products) => {
+        const product = products.find(p => p.ID === req.params.id);
+        if (product) {
+            res.json(product);
+        } else {
+            res.status(404).json({ error: 'Product not found' });
+        }
+    });
+});
+
 //testing
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');

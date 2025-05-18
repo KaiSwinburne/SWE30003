@@ -25,7 +25,7 @@ function getAllProducts(callback) {
 }
 
 function getFeaturedProducts(callback) {
-    const featuredProducts = productList.filter(product => product.Featured === "Yes");
+    const featuredProducts = productList.filter(product => product.Featured === "Yes"); //only yes options
     callback(featuredProducts);
 }
 

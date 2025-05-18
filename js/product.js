@@ -1,6 +1,6 @@
 export class Product {
     constructor(data) {
-        this.id = Math.floor(Math.random() * 10000);
+        this.id = data.ID;
         this.name = data.Name;
         this.desc = data.Description;
         this.brand = data.Brand;
@@ -31,7 +31,10 @@ export class Product {
             <button>Add to Cart</button>
         `
 
-        card.onclick = () => this.showDetails();
+        //card.onclick = () => this.showDetails();
+        card.onclick = () =>{
+            window.location.href = `product.html?id=${this.id}`;    // Redirect to product details page with product ID
+        }
         return card;
     }
 
