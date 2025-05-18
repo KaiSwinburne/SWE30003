@@ -2,7 +2,7 @@
 
 Step 1: Clone this repository into the local system.
 
-Step 2: Navigate to the root project folder
+Step 2: Navigate to the root project folder. It should be "path/SWE30003"
 
 Step 3: Run this command on the local CLI:
 ```sh
