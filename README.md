@@ -4,7 +4,7 @@ Step 1: Clone this repository into the local system.
 
 Step 2: Navigate to the root project folder
 
-Step 3: Run this command:
+Step 3: Run this command on the local CLI:
 ```sh
 nodemon js/server.js
 ```
