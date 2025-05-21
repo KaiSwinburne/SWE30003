@@ -6,6 +6,11 @@ Step 2: Navigate to the root project folder. It should be "path/SWE30003"
 
 Step 3: Run this command on the local CLI:
 ```sh
+npm install csv-writer
+```
+
+Step 3: Run this command on the local CLI:
+```sh
 nodemon js/server.js
 ```
 You should see the data loaded on the CLI. The server is confirmed to be working if you see this message:
