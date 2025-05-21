@@ -28,18 +28,34 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Check if username already exists
-    if (localStorage.getItem(`user_${username}`)) {
-      msg.textContent = "Username already exists. Please choose another.";
-      msg.style.color = "red";
-      return;
-    }
+    // Display loading message
+    msg.textContent = "Creating account...";
+    msg.style.color = "blue";
 
-    // Save credentials to localStorage (not secure, for demo purposes only)
-    localStorage.setItem(`user_${username}`, password);
-    msg.textContent = "Account created successfully!";
-    msg.style.color = "green";
-    this.reset();
+    // Send registration data to the server API
+    fetch('/api/users/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        msg.textContent = "Account created successfully!";
+        msg.style.color = "green";
+        this.reset();
+      } else {
+        msg.textContent = data.message || "Registration failed. Please try again.";
+        msg.style.color = "red";
+      }
+    })
+    .catch(error => {
+      console.error('Error during registration:', error);
+      msg.textContent = "Registration failed. Please try again later.";
+      msg.style.color = "red";
+    });
   });
 
   // Login form handling
@@ -57,25 +73,42 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    const storedPassword = localStorage.getItem(`user_${username}`);
+    // Display loading message
+    msg.textContent = "Logging in...";
+    msg.style.color = "blue";
 
-    if (storedPassword && storedPassword === password) {
-      // Success message
-      msg.textContent = "Login successful! Redirecting...";
-      msg.style.color = "green";
+    // Send login data to the server API
+    fetch('/api/users/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        // Success message
+        msg.textContent = "Login successful! Redirecting...";
+        msg.style.color = "green";
 
-      // Store login status in sessionStorage
-      // This will persist until the browser tab is closed
-      sessionStorage.setItem('loggedIn', 'true');
-      sessionStorage.setItem('username', username);
+        // Store login status in sessionStorage
+        sessionStorage.setItem('loggedIn', 'true');
+        sessionStorage.setItem('username', username);
 
-      // Redirect after a short delay
-      setTimeout(() => {
-        window.location.href = "home.html";
-      }, 1000);
-    } else {
-      msg.textContent = "Invalid username or password.";
+        // Redirect after a short delay
+        setTimeout(() => {
+          window.location.href = "home.html";
+        }, 1000);
+      } else {
+        msg.textContent = data.message || "Invalid username or password.";
+        msg.style.color = "red";
+      }
+    })
+    .catch(error => {
+      console.error('Error during login:', error);
+      msg.textContent = "Login failed. Please try again later.";
       msg.style.color = "red";
-    }
+    });
   });
 });
