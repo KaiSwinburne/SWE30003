@@ -7,6 +7,15 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <title>AWE Electronics - Online</title>
+  <style>
+    /* Add some basic styling for error messages */
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+      display: block;
+    }
+  </style>
 </head>
 <body>
 
@@ -42,18 +51,22 @@
         <label>
           Name on Card:
           <input type="text" id="card-name" placeholder="John Pork" />
+          <span class="error-message" id="card-name-error"></span>
         </label>
         <label>
           Card Number:
           <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" maxlength="16" />
+          <span class="error-message" id="card-number-error"></span>
         </label>
         <label>
           Expiry Date:
           <input type="text" id="card-expiry" placeholder="MM/YY" />
+          <span class="error-message" id="card-expiry-error"></span>
         </label>
         <label>
           CVV:
           <input type="text" id="card-cvv" placeholder="XXX" maxlength="4" />
+          <span class="error-message" id="card-cvv-error"></span>
         </label>
 
         <h3>Shipping Address</h3>
@@ -61,38 +74,47 @@
         <label>
           Country:
           <input type="text" id="shipping-country" placeholder="Australia" />
+          <span class="error-message" id="shipping-country-error"></span>
         </label>
         <label>
           Full Name:
           <input type="text" id="shipping-first-name" placeholder="John" />
+          <span class="error-message" id="shipping-first-name-error"></span>
         </label>
         <label>
           Last Name:
           <input type="text" id="shipping-last-name" placeholder="Pork" />
+          <span class="error-message" id="shipping-last-name-error"></span>
         </label>
         <label>
           Address Line 1:
           <input type="text" id="shipping-address-1" placeholder="123 Main St" />
+          <span class="error-message" id="shipping-address-1-error"></span>
         </label>
         <label>
           Address Line 2 (Optional):
           <input type="text" id="shipping-address-2" placeholder="Apt 4B" />
+          <span class="error-message" id="shipping-address-2-error"></span>
         </label>
         <label>
           City:
           <input type="text" id="shipping-city" placeholder="Melbourne" />
+          <span class="error-message" id="shipping-city-error"></span>
         </label>
         <label>
           State/Province:
           <input type="text" id="shipping-state-province" placeholder="VIC" />
+          <span class="error-message" id="shipping-state-province-error"></span>
         </label>
         <label>
           Zip/Postal Code:
           <input type="text" id="shipping-zip-postal" placeholder="3000" />
+          <span class="error-message" id="shipping-zip-postal-error"></span>
         </label>
         <label>
           Phone Number (Optional):
           <input type="tel" id="shipping-phone" placeholder="04XX XXX XXX" />
+          <span class="error-message" id="shipping-phone-error"></span>
         </label>
 
         <button type="submit" class="order-button">Place Order</button>
