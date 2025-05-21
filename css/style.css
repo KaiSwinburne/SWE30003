@@ -128,28 +128,6 @@ p {
     font-size: 1.5vw;
 }
 
-#featured .product-container{
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    gap: 5em;
-    padding: 1em 0;
-    white-space: nowrap;
-}
-
-#featured .product{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 0 0 auto;
-    width: 200px;
-    max-width: 100%;
-    padding: 10px 20px;
-    border: 2px solid #ababab;
-    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
-    cursor: pointer;
-}
-
 #featured .product:hover{
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
 }
@@ -166,10 +144,40 @@ p {
     margin-bottom: 10px;
 }
 
+#featured .product-container{
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 5em;
+    padding: 1em 0;
+    /* white-space: nowrap; Removing this property from the container is generally good practice
+       if you want content within the cards to wrap, but in this specific case,
+       it refers to the product cards themselves, not the button text inside.
+       The crucial changes are in .product and button. */
+}
+
+#featured .product{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 0 auto;
+    /* Increase the width of the product card */
+    width: 250px; /* Increased from 200px. You might need to experiment with this value. */
+    max-width: 100%;
+    padding: 10px 20px;
+    border: 2px solid #ababab;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+}
+
 #featured .product button{
     color: rgb(255, 255, 255);
     padding: 10px 20px;
-    font-size: 30px;
+    /* Reduce the font size for the button text */
+    font-size: 18px; /* Reduced from 30px. This is the main culprit. */
+    /* Add white-space: normal to allow text to wrap if it's still too long */
+    white-space: normal;
+    text-align: center; /* Center the text within the button */
     background-color: rgb(0, 0, 0);
     text-decoration: none;
     background-repeat: no-repeat;
