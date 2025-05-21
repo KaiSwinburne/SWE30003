@@ -10,30 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartItemsContainer = document.querySelector('.cart-items');
   const totalEl = document.getElementById('cart-total');
 
-  // Preload sample cart if empty
-  function preloadSampleCart() {
-    const existingCart = getCart();
-    if (existingCart.length === 0) {
-      const sampleCart = [
-        {
-          id: 'mac-001',
-          name: 'MacBook Pro',
-          price: 2499.99,
-          quantity: 1,
-          imageURL: 'macbook-pro.jpg'
-        },
-        {
-          id: 'airpods-001',
-          name: 'AirPods Pro',
-          price: 249.99,
-          quantity: 2,
-          imageURL: 'airpods-pro.jpg'
-        }
-      ];
-      saveCart(sampleCart);
-    }
-  }
-
   function renderCart() {
     const cart = getCart();
     cartItemsContainer.innerHTML = '';
@@ -82,6 +58,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  preloadSampleCart();
+  // Add a clear cart button functionality
+  const clearCartBtn = document.createElement('button');
+  clearCartBtn.id = 'clear-cart-btn';
+  clearCartBtn.textContent = 'Clear Cart';
+  clearCartBtn.style.marginTop = '20px';
+  clearCartBtn.style.padding = '8px 16px';
+  clearCartBtn.style.backgroundColor = '#f44336';
+  clearCartBtn.style.color = 'white';
+  clearCartBtn.style.border = 'none';
+  clearCartBtn.style.borderRadius = '4px';
+  clearCartBtn.style.cursor = 'pointer';
+  
+  clearCartBtn.addEventListener('click', () => {
+    saveCart([]);
+    renderCart();
+  });
+  
+  // Add the clear button after the cart total
+  const cartSummary = document.querySelector('.cart-summary');
+  cartSummary.appendChild(clearCartBtn);
+
   renderCart();
 });
