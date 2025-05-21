@@ -293,4 +293,68 @@ p {
     background-color: rgb(79, 79, 79);
 }
 
+/* Add this to your style.css or include in login.html */
 
+/* Account section styling */
+#account-section {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2em;
+    padding: 2em 0;
+}
+
+#account-section form {
+    min-width: 300px;
+    flex: 1;
+    max-width: 450px;
+}
+
+#account-section form h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#account-section .desc {
+    margin-bottom: 15px;
+}
+
+#account-section label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: #000;
+}
+
+#account-section input {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ababab;
+    border-radius: 4px;
+}
+
+#account-section input:focus {
+    outline: none;
+    border-color: rgb(240, 188, 33);
+    box-shadow: 0 0 5px rgba(240, 188, 33, 0.5);
+}
+
+#registerMsg, #loginMsg {
+    font-size: 16px;
+    padding: 10px 0;
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #account-section {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #account-section form {
+        width: 90%;
+    }
+}
