@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AWE Electronics - Online" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>AWE Electronics - Online</title>
+</head>
+<body>
+
+  <section id="header">
+    <a href="home.html">
+      <img src="assets/logo.png" alt="AWE Electronics Logo" />
+    </a>
+    <div>
+      <ul id="navbar">
+        <li>
+          <a href="cart.html">
+            <i class="fa-solid fa-cart-shopping" style="font-size:48px; color:rgb(232, 208, 51)"></i>
+          </a>
+        </li>
+        <li><a href="login.html" class="login-button">Sign In</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="product-details">
+    <div class="single-product-img"></div>
+    <div class="single-product-desc"></div>
+  </section>
+
+  <section id="cart-page">
+    <h2>Your Shopping Cart</h2>
+    <div class="cart-items"></div>
+    <div class="cart-summary">
+      <h3>Total: $<span id="cart-total">0.00</span></h3>
+      <a href="checkout.html" id="checkout-button">Proceed to Checkout</a>
+    </div>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+  <script type="module" src="js/cartPage.js"></script>
+
+</body>
+</html>
