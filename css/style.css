@@ -112,32 +112,43 @@ p {
     color: rgb(240, 188, 33);
 }
 
-/* Featured */
-#featured{
+/* Featured and All section*/
+#featured,
+#all{
     padding-top: 50px;
     padding-left: 80px;
     padding-right: 80px;
     text-align: center;
 }
 
-#featured h1{
+#all{
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+#featured h1,
+#all h1{
     font-size: 3.5vw;
 }
 
-#featured p{
+#featured p,
+#all p{
     font-size: 1.5vw;
 }
 
-#featured .product:hover{
+#featured .product:hover,
+#all .product:hover{
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
 }
 
-#featured .product img{
+#featured .product img,
+#all .product img{
     width: 100%;
     border-radius: 20px;
 }
 
-#featured .product .desc{
+#featured .product .desc,
+#all .product .desc{
     flex-grow: 1;
     text-align: start;
     padding: 10px 0;
@@ -150,19 +161,22 @@ p {
     scroll-behavior: smooth;
     gap: 5em;
     padding: 1em 0;
-    /* white-space: nowrap; Removing this property from the container is generally good practice
-       if you want content within the cards to wrap, but in this specific case,
-       it refers to the product cards themselves, not the button text inside.
-       The crucial changes are in .product and button. */
 }
 
-#featured .product{
+#all .all-products-container{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1em;
+    flex-wrap: wrap;
+}
+
+#featured .product,
+#all .product{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 0 0 auto;
-    /* Increase the width of the product card */
-    width: 250px; /* Increased from 200px. You might need to experiment with this value. */
+    width: 250px; 
     max-width: 100%;
     padding: 10px 20px;
     border: 2px solid #ababab;
@@ -170,14 +184,17 @@ p {
     cursor: pointer;
 }
 
-#featured .product button{
+#all .product{
+    margin-top: 1em;
+}
+
+#featured .product button,
+#all .product button{
     color: rgb(255, 255, 255);
     padding: 10px 20px;
-    /* Reduce the font size for the button text */
-    font-size: 18px; /* Reduced from 30px. This is the main culprit. */
-    /* Add white-space: normal to allow text to wrap if it's still too long */
+    font-size: 18px; 
     white-space: normal;
-    text-align: center; /* Center the text within the button */
+    text-align: center; 
     background-color: rgb(0, 0, 0);
     text-decoration: none;
     background-repeat: no-repeat;
@@ -185,16 +202,19 @@ p {
     transition: all 0.2s ease;
 }
 
-#featured .product button:hover {
+#featured .product button:hover,
+#all .product button:hover {
     background-color: rgb(79, 79, 79);
 }
 
-#featured .product .desc span{
+#featured .product .desc span,
+#all .product .desc span{
     font-size: 18px;
     color: rgb(93, 93, 93);
 }
 
-#featured .product .desc h5{
+#featured .product .desc h5,
+#all .product .desc h5{
     word-break: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -203,11 +223,13 @@ p {
     padding: 10px 10px 0 0;
 }
 
-#featured .product .desc h4{
+#featured .product .desc h4,
+#all .product .desc h4{
     color: rgb(0, 0, 0);
 }
 
-#featured .product .desc p {
+#featured .product .desc p,
+#all .product .desc p {
     font-size: 18px;
 }
 
@@ -534,4 +556,18 @@ button.auth-button:hover {
 .message {
     margin-top: 20px;
     font-size: 16px;
+}
+
+/*footer*/
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #000;
+    color: white;
+    margin-top: 50px;
+}
+
+footer p {
+    margin: 10px 0;
+    color: white;
 }

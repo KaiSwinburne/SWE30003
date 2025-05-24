@@ -24,6 +24,26 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error('Error fetching products:', error));
 
+    fetch('http://localhost:3000/api/products')
+        .then(response => response.json())
+        .then(products => {
+            //select div class product-container
+            const container = document.querySelector('.all-products-container');
+            if (!container) {
+                console.error("Missing .all-products-container in HTML");
+                return;
+            }
+
+            console.log('Received products:', products);
+
+            //create product cards based on returened data
+            products.forEach(p => {
+                const product = new Product(p);
+                const card = product.renderCard();
+                container.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Error fetching products:', error));
 });
 
 document.addEventListener('DOMContentLoaded', function() {
