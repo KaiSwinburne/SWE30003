@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const { getAllProducts, getFeaturedProducts } = require('./catalogueManager');
 const { addUser, verifyUser } = require('./userManager');
 
@@ -78,6 +79,41 @@ app.post('/api/users/login', (req, res) => {
             res.status(401).json({ success: false, message: 'Invalid username or password' });
         }
     });
+});
+
+// Order Submission API
+
+const orderFilePath = path.join(__dirname, '../database/orders.csv');
+
+if (!fs.existsSync(orderFilePath)) {
+  fs.mkdirSync(path.dirname(orderFilePath), { recursive: true });
+  fs.writeFileSync(orderFilePath, 'name,email,address,cardName,cardNumber,cardExpiry,cardCVV,total,items\n');
+}
+
+app.post('/api/order', (req, res) => {
+  const {
+    name, email, address,
+    cardName, cardNumber, cardExpiry, cardCVV,
+    cartItems, total
+  } = req.body;
+
+  if (!cartItems || cartItems.length === 0) {
+    return res.status(400).json({ success: false, message: 'Cart is empty' });
+  }
+
+  const itemsStr = cartItems.map(i => `${i.name} (x${i.quantity})`).join('; ');
+
+  const row = `${name},${email},${address},${cardName},${cardNumber},${cardExpiry},${cardCVV},${total},"${itemsStr}"\n`;
+
+  fs.appendFile(orderFilePath, row, err => {
+    if (err) {
+      console.error('Failed to save order:', err);
+      return res.status(500).json({ success: false, message: 'Failed to save order' });
+    }
+
+    console.log('[ORDER SAVED]', { name, total, items: itemsStr });
+    res.json({ success: true, message: 'Order placed successfully' });
+  });
 });
 
 //testing
