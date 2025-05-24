@@ -2,7 +2,12 @@
 
 import {Product} from './product.js';
 
+let allProducts;
+
 document.addEventListener('DOMContentLoaded', () => {
+    const productSearchBar = document.getElementById('product-search');
+    const allProductContainer = document.querySelector('.all-products-container');
+
     fetch('http://localhost:3000/api/products/featured')
         .then(response => response.json())
         .then(products => {
@@ -15,12 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('Received products:', products);
 
-            //create product cards based on returened data
-            products.forEach(p => {
-                const product = new Product(p);
-                const card = product.renderCard();
-                container.appendChild(card);
-            });
+            renderProductCards(products, container);
         })
         .catch(error => console.error('Error fetching products:', error));
 
@@ -33,17 +33,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Missing .all-products-container in HTML");
                 return;
             }
-
             console.log('Received products:', products);
 
-            //create product cards based on returened data
-            products.forEach(p => {
-                const product = new Product(p);
-                const card = product.renderCard();
-                container.appendChild(card);
-            });
+            allProducts = products;
+
+            renderProductCards(products, container)
         })
         .catch(error => console.error('Error fetching products:', error));
+
+    //search bar filtering
+    productSearchBar.addEventListener('input', (e) =>{
+        const inputs = e.target.value.trim().toLowerCase();
+        const filteredProducts = allProducts.filter(p=>{
+            return(
+                p.Name.toLowerCase().includes(inputs) ||
+                p.Category.toLowerCase().includes(inputs) ||
+                p.Brand.toLowerCase().includes(inputs)
+            );
+        });
+        allProductContainer.innerHTML = '';
+
+        renderProductCards(filteredProducts, allProductContainer);
+        console.log("Search term:", inputs);
+        console.log("filtered:", filteredProducts);
+    })
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -73,3 +86,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+//create product cards based on returned data
+function renderProductCards(products, container){
+    const productsCount = document.getElementById('results');
+    productsCount.innerHTML=`
+        Showing ${products.length} results
+    `
+
+    products.forEach(p => {
+        const product = new Product(p);
+        const card = product.renderCard();
+        container.appendChild(card);
+    });
+}

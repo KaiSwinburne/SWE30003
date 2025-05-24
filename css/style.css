@@ -165,7 +165,7 @@ p {
 
 #all .all-products-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-top: 1em;
     flex-wrap: wrap;
 }
@@ -231,6 +231,23 @@ p {
 #featured .product .desc p,
 #all .product .desc p {
     font-size: 18px;
+}
+
+#all .filter-section{
+    display: flex;
+    justify-content: space-evenly;
+    flex-grow: 1;
+    text-align: start;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#all .filter-section #product-search{
+    padding: 10px 0 0 0;
+    width: 50%;
+    font-size: 1.2rem;
+    border-radius: 4px;
 }
 
 /* single product */
