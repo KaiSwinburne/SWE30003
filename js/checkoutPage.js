@@ -56,6 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
   checkoutForm.addEventListener('submit', async e => {
     e.preventDefault();
 
+    const isLoggedIn = sessionStorage.getItem('loggedIn');
+
+    if(isLoggedIn === 'false'){
+      showMustLoginMessage();
+      return;
+    }
+
     if (!validateForm()) {
       console.log('Form validation failed.');
       return;
@@ -88,3 +95,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+

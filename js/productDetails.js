@@ -47,7 +47,6 @@ function showAddedToCartMessage(productName, quantity) {
     content.style.alignItems = 'center';
     content.style.gap = '10px';
     
-    // Add to the DOM
     document.body.appendChild(notification);
     
     // Trigger animation
@@ -61,7 +60,6 @@ function showAddedToCartMessage(productName, quantity) {
         notification.style.opacity = '0';
         notification.style.transform = 'translateY(20px)';
         
-        // Remove from DOM after animation completes
         setTimeout(() => {
             document.body.removeChild(notification);
         }, 300);
