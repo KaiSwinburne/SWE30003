@@ -1,4 +1,4 @@
-// userManager.js - Handle user data management in CSV file
+// Handle user data management in CSV file
 
 const fs = require('fs');
 const path = require('path');
