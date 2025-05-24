@@ -7,6 +7,8 @@ Step 2: Navigate to the root project folder. It should be "path/SWE30003"
 Step 3: Run this command on the local CLI:
 ```sh
 npm install csv-writer
+npm install express cors csv-parser
+npm install -g nodemon
 ```
 
 Step 3: Run this command on the local CLI:

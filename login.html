@@ -5,74 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Account Registration & Login</title>
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* Clean, centered login form styling */
-    .login-container {
-      display: flex;
-      justify-content: center;
-      padding: 40px 0;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    
-    .form-card {
-      border: 1px solid #ddd;
-      padding: 30px;
-      width: 400px;
-      text-align: center;
-    }
-    
-    .form-card h2 {
-      font-size: 36px;
-      margin-bottom: 30px;
-    }
-    
-    .form-group {
-      margin-bottom: 20px;
-      text-align: left;
-    }
-    
-    .form-group label {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    
-    .form-group input {
-      width: 100%;
-      padding: 12px;
-      font-size: 18px;
-      border: 1px solid #ddd;
-    }
-    
-    button.auth-button {
-      background-color: #000;
-      color: #fff;
-      border: none;
-      padding: 15px 0;
-      font-size: 20px;
-      width: 100%;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    
-    button.auth-button:hover {
-      background-color: #333;
-    }
-    
-    .message {
-      margin-top: 20px;
-      font-size: 16px;
-    }
-  </style>
 </head>
 <body>
-  <header id="header">
-    <h1>Account Portal</h1>
-    <nav id="navbar">
-      <li><a href="home.html" class="login-button">Home</a></li>
-    </nav>
-  </header>
+  <section id="header">
+        <a href="home.html">
+            <img src="assets/logo.png" alt="AWE Electronics Logo" />
+        </a>
+
+        <div>
+            <ul id="navbar">
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping" style="font-size:48px;color:rgb(232, 208, 51)"></i></a></li>
+                <li id="login-section">
+                    <a href="login.html" class="login-button" id="login-button">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </section>
 
   <section id="welcome">
     <h4>Welcome to</h4>
@@ -119,5 +67,6 @@
   </div>
 
   <script src="js/login.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

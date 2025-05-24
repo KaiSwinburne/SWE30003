@@ -475,3 +475,63 @@ label {
         width: 90%;
     }
 }
+
+/*login page*/
+ /* Clean, centered login form styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.form-card {
+    border: 1px solid #ddd;
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+}
+
+.form-card h2 {
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+}
+
+button.auth-button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 15px 0;
+    font-size: 20px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button.auth-button:hover {
+    background-color: #333;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 16px;
+}
