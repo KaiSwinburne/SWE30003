@@ -36,6 +36,7 @@ function createOrder(data, callback){
                     const lineLastID = parseInt(line.split(',')[0]);
                     if (!isNaN(lineLastID)) {
                         currentID = lineLastID + 1; //update ID accordingly
+                        break;
                     }
                 }
             }
