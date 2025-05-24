@@ -10,7 +10,7 @@ export class Product {
         this.size = data.Size;
         this.availability = data.Availability;
         this.ratings = data.Ratings;
-        this.imageURL = data.imageURLs || '../assets/default.jpg';
+        this.imageURL = data.imageURLs;
         this.featured = data.Featured;
     }
     
