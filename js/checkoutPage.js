@@ -56,12 +56,20 @@ document.addEventListener('DOMContentLoaded', () => {
   checkoutForm.addEventListener('submit', async e => {
     e.preventDefault();
 
+    const isLoggedIn = sessionStorage.getItem('loggedIn');
+
+    if(isLoggedIn === 'false'){
+      showMustLoginMessage();
+      return;
+    }
+
     if (!validateForm()) {
       console.log('Form validation failed.');
       return;
     }
 
     const orderData = {
+      username: sessionStorage.getItem('username') || 'guest',
       name: document.getElementById('shipping-first-name').value + ' ' + document.getElementById('shipping-last-name').value,
       email: document.getElementById('shipping-email')?.value || 'none',
       address: `${document.getElementById('shipping-address-1').value}, ${document.getElementById('shipping-city').value}, ${document.getElementById('shipping-state-province').value}, ${document.getElementById('shipping-country').value}`,

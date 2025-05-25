@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account Registration & Login</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <section id="header">
+         <a href="home.html">
+            <img src="assets/logo.png" alt="AWE Electronics Logo" />
+        </a>
+
+
+
+        <div>
+            <ul id="navbar">
+                <li><a href="cart.html"><i class="fa-solid fa-cart-shopping" style="font-size:48px;color:rgb(232, 208, 51)"></i></a></li>
+                <li id="login-section">
+                    <a href="login.html" class="login-button" id="login-button">Sign In</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+  <section id="welcome">
+    <h4>Welcome to</h4>
+    <h1>Your Account Center</h1>
+    <p>Sign up or login to access exclusive content</p>
+  </section>
+
+  <div class="login-container">
+    <div class="form-card">
+      <h2>Create Account</h2>
+      <form id="registerForm">
+        <div class="form-group">
+          <label for="regUsername">Username</label>
+          <input type="text" id="regUsername" required />
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" required />
+        </div>
+        <div class="form-group">
+          <label for="regConfirm">Confirm Password</label>
+          <input type="password" id="regConfirm" required />
+        </div>
+        <button type="submit" class="auth-button">Register</button>
+        <div id="registerMsg" class="message"></div>
+      </form>
+    </div>
+
+    <div class="form-card">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" required />
+        </div>
+        <button type="submit" class="auth-button">Login</button>
+        <div id="loginMsg" class="message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/login.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

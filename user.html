@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <section id="header">
+     <a href="home.html">
+            <img src="assets/logo.png" alt="AWE Electronics Logo" />
+        </a>
+
+    <h2>Welcome, <span id="user-name"></span></h2>
+  </section>
+
+  <section>
+    <button onclick="window.location.href='orderHistory.html'">View Order History</button>
+  </section>
+
+  <script>
+    document.getElementById('user-name').textContent = sessionStorage.getItem('username') || '';
+  </script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

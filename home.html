@@ -11,14 +11,18 @@
 
 <body>
     <section id="header">
-        <a href="home.html">
+         <a href="home.html">
             <img src="assets/logo.png" alt="AWE Electronics Logo" />
         </a>
+
+
 
         <div>
             <ul id="navbar">
                 <li><a href="cart.html"><i class="fa-solid fa-cart-shopping" style="font-size:48px;color:rgb(232, 208, 51)"></i></a></li>
-                <li><a href="login.html" class="login-button">Sign In</a></li>
+                <li id="login-section">
+                    <a href="login.html" class="login-button" id="login-button">Sign In</a>
+                </li>
             </ul>
         </div>
     </section>
@@ -27,7 +31,7 @@
         <h4>New Offer Available</h4>
         <h1>Best Deals For Electronics Product</h1>
         <p>Save up to 30% off with coupons</p>
-        <button>Explore Featured Products</button>
+        <button onclick="location.href='#featured'">Explore Featured Products</button>
     </section>
 
     <section id="featured">
@@ -35,6 +39,21 @@
         <p>Shop Most Popular Products Here</p>
         <div class="product-container"></div>
     </section>
+
+    <section id="all">   
+        <h1>Browse our catalogue</h1>
+        <p>Everything at your service</p>
+        <div class="filter-section">
+            <p id="results"></p>
+            <input type="text" id="product-search" placeholder="Search Product">
+        </div>
+        <div class="all-products-container"></div>
+    </section>
+
+    <footer>
+        <p>SWE30003 Assignment 3</p>
+        <p>Contributors: Thanh Tai Tran, Sabri Bayanta, Inder Singh, Ethan Ly</p>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
     <script type="module" src="js/main.js"></script>
