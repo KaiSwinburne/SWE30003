@@ -1,6 +1,4 @@
-// Wait for DOM content to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
-  // Register form handling
   document.getElementById('registerForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -9,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const confirm = document.getElementById('regConfirm').value;
     const msg = document.getElementById('registerMsg');
 
-    // Form validation
     if (!username) {
       msg.textContent = "Please enter a username.";
       msg.style.color = "red";
@@ -28,11 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Display loading message
     msg.textContent = "Creating account...";
     msg.style.color = "blue";
 
-    // Send registration data to the server API
     fetch('/api/users/register', {
       method: 'POST',
       headers: {
@@ -58,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Login form handling
   document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -66,18 +60,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const password = document.getElementById('loginPassword').value;
     const msg = document.getElementById('loginMsg');
 
-    // Form validation
     if (!username || !password) {
       msg.textContent = "Please enter both username and password.";
       msg.style.color = "red";
       return;
     }
 
-    // Display loading message
     msg.textContent = "Logging in...";
     msg.style.color = "blue";
 
-    // Send login data to the server API
     fetch('/api/users/login', {
       method: 'POST',
       headers: {
@@ -88,15 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
       if (data.success) {
-        // Success message
         msg.textContent = "Login successful! Redirecting...";
         msg.style.color = "green";
 
-        // Store login status in sessionStorage
         sessionStorage.setItem('loggedIn', 'true');
         sessionStorage.setItem('username', username);
 
-        // Redirect after a short delay
         setTimeout(() => {
           window.location.href = "home.html";
         }, 1000);
