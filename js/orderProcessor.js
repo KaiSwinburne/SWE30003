@@ -1,62 +1,95 @@
-//Handles all orders related functions
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
+const csv = require('csv-parser');
 
+const ordersFile = path.join(__dirname, '../database/orders.csv');
 
-const orderFilePath = path.join(__dirname, '../database/orders.csv');
-
-if (!fs.existsSync(orderFilePath)) {
-  fs.mkdirSync(path.dirname(orderFilePath), { recursive: true });
-  fs.writeFileSync(orderFilePath, 'id,name,email,address,cardName,cardNumber,cardExpiry,cardCVV,total,items\n');
+if (!fs.existsSync(ordersFile)) {
+  fs.mkdirSync(path.dirname(ordersFile), { recursive: true });
+  fs.writeFileSync(ordersFile, 'username,id,name,email,address,cardName,cardNumber,cardExpiry,cardCVV,total,items,timestamp\n');
 }
 
-function createOrder(data, callback){
-    const {
-        name, email, address,
-        cardName, cardNumber, cardExpiry, cardCVV,
-        cartItems, total
-    } = data;
+function createOrder(data, callback) {
+  const username = data.username;
+  const name = data.name;
+  const email = data.email;
+  const address = data.address;
+  const cardName = data.cardName;
+  const cardNumber = data.cardNumber;
+  const cardExpiry = data.cardExpiry;
+  const cardCVV = data.cardCVV;
+  const cartItems = data.cartItems;
+  const total = data.total;
 
-    if (!cartItems || cartItems.length === 0) {
-        return callback({ success: false, message: 'Cart is empty' });
+  if (!cartItems || cartItems.length === 0) {
+    return callback({ success: false, message: 'Cart is empty' });
+  }
+
+  fs.readFile(ordersFile, 'utf-8', function (err, content) {
+    let orderId = 1;
+    if (!err) {
+      const lines = content.trim().split('\n');
+      for (let i = lines.length - 1; i >= 1; i--) {
+        const columns = lines[i].trim().split(',');
+        const lastId = parseInt(columns[1]);
+        if (!isNaN(lastId)) {
+          orderId = lastId + 1;
+          break;
+        }
+      }
     }
 
-    fs.readFile(orderFilePath,'utf-8',(err,data) => {
-        let currentID = 1;
-        if (!err){
-            //get the lines count
-            const lines = data.trim().split('\n');
+    const itemList = cartItems.map(function (item) {
+      return item.name + ' (x' + item.quantity + ')';
+    }).join('; ');
 
-            //start from the end to find a valid line
-            for (let i=lines.length - 1; i>=1; i--){
-                const line = lines[i].trim();
-                if (line){
-                    const lineLastID = parseInt(line.split(',')[0]);
-                    if (!isNaN(lineLastID)) {
-                        currentID = lineLastID + 1; //update ID accordingly
-                        break;
-                    }
-                }
-            }
-        }
-        const itemsStr = cartItems.map(i => `${i.name} (x${i.quantity})`).join('; ');
+    const time = new Date().toISOString();
 
-        const row = `${currentID},${name},${email},${address},${cardName},${cardNumber},${cardExpiry},${cardCVV},${total},"${itemsStr}"\n`;
+    const row = [
+      username,
+      orderId,
+      '"' + name + '"',
+      '"' + email + '"',
+      '"' + address + '"',
+      cardName,
+      cardNumber,
+      cardExpiry,
+      cardCVV,
+      total,
+      '"' + itemList + '"',
+      time
+    ].join(',') + '\n';
 
-        fs.appendFile(orderFilePath, row, err => {
-            if (err) {
-            console.error('Failed to save order:', err);
-            return callback({ success: false, message: 'Failed to save order' });
-            }
+    fs.appendFile(ordersFile, row, function (err) {
+      if (err) {
+        return callback({ success: false, message: 'Failed to save order' });
+      }
+      callback({ success: true, message: 'Order placed successfully' });
+    });
+  });
+}
 
-            console.log('[ORDER SAVED]', { name, total, items: itemsStr });
-            callback({ success: true, message: 'Order placed successfully' });
-        });
+function getOrdersByUser(username, callback) {
+  const userOrders = [];
+
+  fs.createReadStream(ordersFile)
+    .pipe(csv())
+    .on('data', function (row) {
+      if (row.username && row.username.toLowerCase() === username.toLowerCase()) {
+        userOrders.push(row);
+      }
+    })
+    .on('end', function () {
+      callback(userOrders);
+    })
+    .on('error', function () {
+      callback([]);
     });
 }
 
 module.exports = {
-    createOrder
+  createOrder: createOrder,
+  getOrdersByUser: getOrdersByUser
 };

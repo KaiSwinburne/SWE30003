@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Order History</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <h2>Your Order History</h2>
+  <div id="orders-container">Loading...</div>
+
+  <script type="module">
+    const username = sessionStorage.getItem('username');
+    const ordersContainer = document.getElementById('orders-container');
+
+    if (!username) {
+      ordersContainer.innerHTML = "<p>Please log in to view your order history.</p>";
+    } else {
+      fetch(`/api/orders/${username}`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.length) {
+            ordersContainer.innerHTML = "<p>No orders found.</p>";
+            return;
+          }
+
+          const html = data.map(order => {
+            const formattedDate = new Date(order.timestamp).toLocaleString();
+            const formattedTotal = parseFloat(order.total || '0').toFixed(2);
+
+            return `
+              <div class="order-card" style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 12px;">
+                <h4>Order ID: ${order.id}</h4>
+                <p><strong>Name:</strong> ${order.name}</p>
+                <p><strong>Email:</strong> ${order.email}</p>
+                <p><strong>Address:</strong> ${order.address}</p>
+                <p><strong>Items:</strong></p>
+                <p>${order.items}</p>
+                <p><strong>Total:</strong> $${formattedTotal}</p>
+              </div>
+            `;
+          }).join('');
+
+          ordersContainer.innerHTML = html;
+        })
+        .catch(() => {
+          ordersContainer.innerHTML = "<p>Failed to load orders.</p>";
+        });
+    }
+  </script>
+</body>
+</html>

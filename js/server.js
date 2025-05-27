@@ -1,99 +1,93 @@
-//handle all server API requests
-
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const fs = require('fs');
 const { getAllProducts, getFeaturedProducts } = require('./catalogueManager');
 const { addUser, verifyUser } = require('./userManager');
-const {createOrder} = require('./orderProcessor');
-const PORT = 3000;
+const { createOrder, getOrdersByUser } = require('./orderProcessor');
 
 const app = express();
+const PORT = 3000;
+
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..')));
-app.use(express.json()); // Added to parse JSON request body
+app.use(express.json());
 
-//for testing API requests
-app.use((req, res, next) => {
-  console.log(`[REQUEST] ${req.method} ${req.url}`);
+app.use(function(req, res, next) {
+  console.log('[REQUEST] ' + req.method + ' ' + req.url);
   next();
 });
 
-app.get('/api/products', (req, res) => {
-    getAllProducts((products) => {
-        res.json(products);
-    });
+app.get('/api/products', function(req, res) {
+  getAllProducts(function(products) {
+    res.json(products);
+  });
 });
 
-app.get('/api/products/featured', (req, res) => {
-    getFeaturedProducts((products) => {
-        res.json(products);
-    });
+app.get('/api/products/featured', function(req, res) {
+  getFeaturedProducts(function(products) {
+    res.json(products);
+  });
 });
 
-app.get('/api/product/:id', (req, res) => {
-    getAllProducts((products) => {
-        const product = products.find(p => p.ID === req.params.id);
-        if (product) {
-            res.json(product);
-        } else {
-            res.status(404).json({ error: 'Product not found' });
-        }
+app.get('/api/product/:id', function(req, res) {
+  getAllProducts(function(products) {
+    const product = products.find(function(p) {
+      return p.ID === req.params.id;
     });
-});
-
-// User registration API endpoint
-app.post('/api/users/register', (req, res) => {
-    const { username, password } = req.body;
-    
-    if (!username || !password) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'Username and password are required' 
-        });
+    if (product) {
+      res.json(product);
+    } else {
+      res.status(404).json({ error: 'Product not found' });
     }
-    
-    addUser(username, password, (result) => {
-        if (result.success) {
-            res.status(201).json(result);
-        } else {
-            res.status(400).json(result);
-        }
-    });
+  });
 });
 
-// User login API endpoint
-app.post('/api/users/login', (req, res) => {
-    const { username, password } = req.body;
-    
-    if (!username || !password) {
-        return res.status(400).json({ 
-            success: false, 
-            message: 'Username and password are required' 
-        });
+app.post('/api/users/register', function(req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+  if (!username || !password) {
+    return res.status(400).json({ success: false, message: 'Username and password are required' });
+  }
+  addUser(username, password, function(result) {
+    if (result.success) {
+      res.status(201).json(result);
+    } else {
+      res.status(400).json(result);
     }
-    
-    verifyUser(username, password, (result) => {
-        if (result.success) {
-            res.json({ success: true, message: 'Login successful' });
-        } else {
-            res.status(401).json({ success: false, message: 'Invalid username or password' });
-        }
-    });
+  });
 });
 
-// Order Submission API
-app.post('/api/order', (req, res) => {
-    createOrder(req.body,(result) => {
-        if (!result.success){
-            return res.status(400).json(result);
-        }
-        res.json(result);
-    });
+app.post('/api/users/login', function(req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+  if (!username || !password) {
+    return res.status(400).json({ success: false, message: 'Username and password are required' });
+  }
+  verifyUser(username, password, function(result) {
+    if (result.success) {
+      res.json({ success: true, message: 'Login successful' });
+    } else {
+      res.status(401).json({ success: false, message: 'Invalid username or password' });
+    }
+  });
 });
 
-//testing
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+app.post('/api/order', function(req, res) {
+  createOrder(req.body, function(result) {
+    if (result.success) {
+      res.json(result);
+    } else {
+      res.status(400).json(result);
+    }
+  });
+});
+
+app.get('/api/orders/:username', function(req, res) {
+  getOrdersByUser(req.params.username, function(orders) {
+    res.json(orders);
+  });
+});
+
+app.listen(PORT, function() {
+  console.log('Server running at http://localhost:' + PORT);
 });
