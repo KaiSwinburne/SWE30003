@@ -1,16 +1,16 @@
 ID,Name,Description,Brand,Category,Price,Stock,Size,Availability,Ratings,imageURLs,Featured
-1,Compact Printer Air Advanced Digital,Situation organization these memory much off.,Garner,Books & Stationery,265,774,Large,Out of Stock,5,,Yes
-2,Tablet,Discussion loss politics free one thousand.,Mueller Inc,Shoes & Footwear,502,81,8x10 in,Available,5,,Yes
-3,Smart Blender Cooker,No situation per.,Lawson,Kitchen Appliances,227,726,XS,Available,5,,Yes
-4,Advanced Router Rechargeable,For force gas energy six laugh.,Gallagher and Sons,Kitchen Appliances,121,896,L,Discontinued,5,,No
-5,Portable Mouse Monitor Phone,Feeling back religious however author room scientist.,Irwin LLC,Kids' Clothing,1,925,100x200 mm,Discontinued,5,,Yes
-6,Radio,Character prove growth contain serious customer.,Benjamin,Skincare,426,549,30x40 cm,Out of Stock,5,,Yes
-7,Ultra Projector Oven Thermostat Prime Advanced,Pattern possible look necessary indicate work nearly.,Mccoy,Laptops & Computers,68,870,S,Discontinued,5,,No
-8,Webcam Stove Grill,Deep area join carry age.,Morrow and Sons,Automotive,159,584,8x10 in,Out of Stock,5,,Yes
-9,Eco Radio,Know father for act let.,Edwards,Skincare,454,499,Medium,Available,5,,No
-10,Ultra Powerbank Brush Charger Max,Meeting add economic task outside.,Brennan,Fitness Equipment,845,564,Extra Large,Discontinued,5,,No
-11,Wireless Dock,Whole bill sound whether will.,Russo-West,Health & Wellness,257,168,Extra Large,Out of Stock,5,,Yes
-12,Fast Camera Router Fan Smart,Various above trouble itself crime form.,Vazquez,Cleaning Supplies,221,672,Medium,Out of Stock,5,,No
-13,Heater Radio,Ten do evidence billion perhaps read bank enter.,Delgado-Blackwell,Cycling,689,156,L,Available,5,,Yes
-14,Smart Trimmer Webcam Heater,Example available better.,Contreras PLC,Automotive,279,818,XXL,Available,5,,No
-15,Webcam Dock Heater,State yet soon traditional your deal.,Juarez,Cleaning Supplies,101,159,30x40 cm,Available,5,,No
+1,Compact Printer Air Advanced Digital,Situation organization these memory much off.,Garner,Books & Stationery,265,774,Large,Out of Stock,5,toast.jpg,Yes
+2,Tablet,Discussion loss politics free one thousand.,Mueller Inc,Shoes & Footwear,502,81,8x10 in,Available,5,toast.jpg,Yes
+3,Smart Blender Cooker,No situation per.,Lawson,Kitchen Appliances,227,726,XS,Available,5,default.jpg,Yes
+4,Advanced Router Rechargeable,For force gas energy six laugh.,Gallagher and Sons,Kitchen Appliances,121,896,L,Discontinued,5,toast.jpg,No
+5,Portable Mouse Monitor Phone,Feeling back religious however author room scientist.,Irwin LLC,Kids' Clothing,1,925,100x200 mm,Discontinued,5,default.jpg,Yes
+6,Radio,Character prove growth contain serious customer.,Benjamin,Skincare,426,549,30x40 cm,Out of Stock,5,charger.jpg,Yes
+7,Ultra Projector Oven Thermostat Prime Advanced,Pattern possible look necessary indicate work nearly.,Mccoy,Laptops & Computers,68,870,S,Discontinued,5,default.jpg,No
+8,Webcam Stove Grill,Deep area join carry age.,Morrow and Sons,Automotive,159,584,8x10 in,Out of Stock,5,default.jpg,Yes
+9,Eco Radio,Know father for act let.,Edwards,Skincare,454,499,Medium,Available,5,camera.jpg,No
+10,Ultra Powerbank Brush Charger Max,Meeting add economic task outside.,Brennan,Fitness Equipment,845,564,Extra Large,Discontinued,5,charger.jpg,No
+11,Wireless Dock,Whole bill sound whether will.,Russo-West,Health & Wellness,257,168,Extra Large,Out of Stock,5,toast.jpg,Yes
+12,Fast Camera Router Fan Smart,Various above trouble itself crime form.,Vazquez,Cleaning Supplies,221,672,Medium,Out of Stock,5,default.jpg,No
+13,Heater Radio,Ten do evidence billion perhaps read bank enter.,Delgado-Blackwell,Cycling,689,156,L,Available,5,camera.jpg,Yes
+14,Smart Trimmer Webcam Heater,Example available better.,Contreras PLC,Automotive,279,818,XXL,Available,5,charger.jpg,No
+15,Webcam Dock Heater,State yet soon traditional your deal.,Juarez,Cleaning Supplies,101,159,30x40 cm,Available,5,fridge.jpg,No

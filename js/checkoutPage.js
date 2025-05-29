@@ -165,28 +165,17 @@ document.addEventListener('DOMContentLoaded', function () {
       isValid = false;
     }
 
-    const shippingLastName = document.getElementById('shipping-last-name').value.trim();
-    if (shippingLastName === '') {
-      displayError('shipping-last-name', 'Last name is required.');
-      isValid = false;
-    }
+    return isValid;
+  }
 
-    const shippingAddress1 = document.getElementById('shipping-address-1').value.trim();
-    if (shippingAddress1 === '') {
-      displayError('shipping-address-1', 'Address Line 1 is required.');
-      isValid = false;
-    }
+  checkoutForm.addEventListener('submit', async e => {
+    e.preventDefault();
 
-    const shippingCity = document.getElementById('shipping-city').value.trim();
-    if (shippingCity === '') {
-      displayError('shipping-city', 'City is required.');
-      isValid = false;
-    }
+    const isLoggedIn = sessionStorage.getItem('loggedIn');
 
-    const shippingStateProvince = document.getElementById('shipping-state-province').value.trim();
-    if (shippingStateProvince === '') {
-      displayError('shipping-state-province', 'State/Province is required.');
-      isValid = false;
+    if(isLoggedIn === 'false'){
+      showMustLoginMessage();
+      return;
     }
 
     const shippingZipPostal = document.getElementById('shipping-zip-postal').value.trim();
@@ -220,3 +209,4 @@ document.addEventListener('DOMContentLoaded', function () {
   applyInputLimiters();
   checkoutForm.addEventListener('submit', handleCheckoutSubmit);
 });
+
