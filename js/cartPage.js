@@ -6,7 +6,33 @@ import {
   getCartTotal
 } from './cartManager.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
+
+  const isLoggedIn = sessionStorage.getItem('loggedIn');
+  const username = sessionStorage.getItem('username');
+
+  if (isLoggedIn === 'true' && username) {
+    const loginSection = document.getElementById('login-section');
+
+    if (loginSection) {
+      loginSection.innerHTML = `
+        <div style="display: flex; align-items: center;">
+          <img src="assets/account.png" alt="Account" style="height: 48px; width: auto;">
+          <span style="color: rgb(232, 208, 51); margin-left: 8px;">${username}</span>
+          <a href="#" id="logout-button" style="margin-left: 10px; color: rgb(232, 208, 51); font-size: 16px;">(Logout)</a>
+        </div>
+      `;
+
+      document.getElementById('logout-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        sessionStorage.removeItem('loggedIn');
+        sessionStorage.removeItem('username');
+        window.location.reload();
+      });
+    }
+  }
+
+
   const cartItemsContainer = document.querySelector('.cart-items');
   const totalEl = document.getElementById('cart-total');
   const processButton = document.getElementById('checkout-button');
@@ -23,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    cart.forEach(item => {
+    cart.forEach(function (item) {
       const itemEl = document.createElement('div');
       itemEl.className = 'cart-item';
       itemEl.innerHTML = `
@@ -44,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     totalEl.textContent = getCartTotal().toFixed(2);
   }
 
+
   if(isLoggedIn === null){
       processButton.addEventListener('click', function(e) {
             e.preventDefault();
@@ -51,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
   }
 
-  cartItemsContainer.addEventListener('input', e => {
+
+  cartItemsContainer.addEventListener('input', function (e) {
+
     if (e.target.type === 'number') {
       const id = e.target.getAttribute('data-id');
       const qty = parseInt(e.target.value);
@@ -60,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  cartItemsContainer.addEventListener('click', e => {
+  cartItemsContainer.addEventListener('click', function (e) {
     if (e.target.classList.contains('remove-btn')) {
       const id = e.target.getAttribute('data-id');
       removeFromCart(id);
@@ -68,24 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Add a clear cart button functionality
   const clearCartBtn = document.createElement('button');
   clearCartBtn.id = 'clear-cart-btn';
+  clearCartBtn.classList.add('clear-cart-btn');
   clearCartBtn.textContent = 'Clear Cart';
-  clearCartBtn.style.marginTop = '20px';
-  clearCartBtn.style.padding = '8px 16px';
-  clearCartBtn.style.backgroundColor = '#f44336';
-  clearCartBtn.style.color = 'white';
-  clearCartBtn.style.border = 'none';
-  clearCartBtn.style.borderRadius = '4px';
-  clearCartBtn.style.cursor = 'pointer';
-  
-  clearCartBtn.addEventListener('click', () => {
+
+  clearCartBtn.addEventListener('click', function () {
     saveCart([]);
     renderCart();
   });
-  
-  // Add the clear button after the cart total
+
   const cartSummary = document.querySelector('.cart-summary');
   cartSummary.appendChild(clearCartBtn);
 

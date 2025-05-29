@@ -1,4 +1,3 @@
-//handle all server API requests
 
 const express = require('express');
 const cors = require('cors');
@@ -12,9 +11,8 @@ const PORT = 3000;
 const app = express();
 app.use(cors());
 app.use(express.static(path.join(__dirname, '..')));
-app.use(express.json()); // Added to parse JSON request body
+app.use(express.json()); 
 
-//for testing API requests
 app.use((req, res, next) => {
   console.log(`[REQUEST] ${req.method} ${req.url}`);
   next();
@@ -43,7 +41,6 @@ app.get('/api/product/:id', (req, res) => {
     });
 });
 
-// User registration API endpoint
 app.post('/api/users/register', (req, res) => {
     const { username, password } = req.body;
     
@@ -63,7 +60,6 @@ app.post('/api/users/register', (req, res) => {
     });
 });
 
-// User login API endpoint
 app.post('/api/users/login', (req, res) => {
     const { username, password } = req.body;
     
@@ -83,6 +79,7 @@ app.post('/api/users/login', (req, res) => {
     });
 });
 
+
 // Order Submission API
 app.post('/api/order', (req, res) => {
     createOrder(req.body,(result) => {
@@ -93,7 +90,7 @@ app.post('/api/order', (req, res) => {
     });
 });
 
-//testing
+
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
