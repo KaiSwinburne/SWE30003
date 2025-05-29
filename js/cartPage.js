@@ -7,7 +7,9 @@ import {
 } from './cartManager.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-
+  const cartItemsContainer = document.querySelector('.cart-items');
+  const totalEl = document.getElementById('cart-total');
+  const processButton = document.getElementById('checkout-button');
   const isLoggedIn = sessionStorage.getItem('loggedIn');
   const username = sessionStorage.getItem('username');
 
@@ -32,13 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-
-  const cartItemsContainer = document.querySelector('.cart-items');
-  const totalEl = document.getElementById('cart-total');
-  const processButton = document.getElementById('checkout-button');
-  const isLoggedIn = sessionStorage.getItem('loggedIn');
-  const username = sessionStorage.getItem('username');
-
+  //render the items in the cart
   function renderCart() {
     const cart = getCart();
     cartItemsContainer.innerHTML = '';
@@ -70,9 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
     totalEl.textContent = getCartTotal().toFixed(2);
   }
 
-
-  cartItemsContainer.addEventListener('input', function (e) {
-
+  
   if(isLoggedIn === null){
       processButton.addEventListener('click', function(e) {
             e.preventDefault();
@@ -80,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
   }
 
+
+  cartItemsContainer.addEventListener('input', function (e) {
     if (e.target.type === 'number') {
       const id = e.target.getAttribute('data-id');
       const qty = parseInt(e.target.value);

@@ -2,8 +2,6 @@ import { getCart, getCartTotal } from './cartManager.js';
 
 document.addEventListener('DOMContentLoaded', function () {
 
-
-
   const isLoggedIn = sessionStorage.getItem('loggedIn');
   const username = sessionStorage.getItem('username');
 
@@ -28,8 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-
-  
   const orderItemsContainer = document.getElementById('order-items');
   const orderTotalEl = document.getElementById('order-total');
   const cart = getCart();
@@ -158,25 +154,29 @@ document.addEventListener('DOMContentLoaded', function () {
       isValid = false;
     }
 
+    const address1 = document.getElementById('shipping-address-1').value.trim();
+    if (address1 === '') {
+      displayError('shipping-address-1', 'Primary address is required.');
+      isValid = false;
+    }
+
     const shippingFirstName = document.getElementById('shipping-first-name').value.trim();
     if (shippingFirstName === '') {
       displayError('shipping-first-name', 'First name is required.');
       isValid = false;
     }
 
-    return isValid;
-  }
-
-  checkoutForm.addEventListener('submit', async e => {
-    e.preventDefault();
-
-    const isLoggedIn = sessionStorage.getItem('loggedIn');
-
-    if(isLoggedIn === 'false'){
-      showMustLoginMessage();
-      return;
+    const city = document.getElementById('shipping-city').value.trim();
+    if (city === '') {
+      displayError('shipping-city', 'City is required.');
+      isValid = false;
     }
 
+    const state = document.getElementById('shipping-state-province').value.trim();
+    if (state === '') {
+      displayError('shipping-state-province', 'State/Province is required.');
+      isValid = false;
+    }
 
     const shippingZipPostal = document.getElementById('shipping-zip-postal').value.trim();
     if (shippingZipPostal === '') {
@@ -196,11 +196,43 @@ document.addEventListener('DOMContentLoaded', function () {
     return isValid;
   }
 
+  checkoutForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const orderData = {
+      name: document.getElementById('shipping-first-name').value + ' ' + document.getElementById('shipping-last-name').value,
+      email: document.getElementById('shipping-email')?.value || 'none',
+      address: `${document.getElementById('shipping-address-1').value}, ${document.getElementById('shipping-city').value}, ${document.getElementById('shipping-state-province').value}, ${document.getElementById('shipping-country').value}`,
+      cardName: document.getElementById('card-name').value,
+      cardNumber: document.getElementById('card-number').value,
+      cardExpiry: document.getElementById('card-expiry').value,
+      cardCVV: document.getElementById('card-cvv').value,
+      cartItems: getCart(),
+      total: getCartTotal().toFixed(2)
+    };
+
+    const res = await fetch('/api/order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderData)
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      localStorage.removeItem('shopping_cart');
+      window.location.href = 'order.html';
+    } else {
+      alert('Failed to place order. Please try again.');
+    }
+  })
+
+  //testing purposes
   function handleCheckoutSubmit(e) {
     e.preventDefault();
     if (validateForm()) {
       localStorage.removeItem('cart');
       window.location.href = 'order.html';
+
     } else {
       console.log('Form validation failed.');
     }

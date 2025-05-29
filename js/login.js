@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    if (password.length < 8 || !/[$%^&*]/.test(password)) {
+    if (password.length < 8 || !/[!@#$%^&*]/.test(password)) {
       msg.textContent = "Password must be at least 8 characters and include a special character ($, %, ^, &, *).";
       msg.style.color = "red";
       return;
@@ -35,22 +35,22 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       body: JSON.stringify({ username, password })
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        msg.textContent = "Account created successfully!";
-        msg.style.color = "green";
-        this.reset();
-      } else {
-        msg.textContent = data.message || "Registration failed. Please try again.";
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          msg.textContent = "Account created successfully! You can now log in.";
+          msg.style.color = "green";
+          this.reset();
+        } else {
+          msg.textContent = data.message || "Registration failed. Please try again.";
+          msg.style.color = "red";
+        }
+      })
+      .catch(error => {
+        console.error('Error during registration:', error);
+        msg.textContent = "Registration failed. Please try again later.";
         msg.style.color = "red";
-      }
-    })
-    .catch(error => {
-      console.error('Error during registration:', error);
-      msg.textContent = "Registration failed. Please try again later.";
-      msg.style.color = "red";
-    });
+      });
   });
 
   document.getElementById('loginForm').addEventListener('submit', function (e) {
