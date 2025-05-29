@@ -1,7 +1,6 @@
 import { getCart, getCartTotal } from './cartManager.js';
 
 document.addEventListener('DOMContentLoaded', function () {
-
   const isLoggedIn = sessionStorage.getItem('loggedIn');
   const username = sessionStorage.getItem('username');
 
@@ -17,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
       `;
 
-      document.getElementById('logout-button').addEventListener('click', function(e) {
+      document.getElementById('logout-button').addEventListener('click', function (e) {
         e.preventDefault();
         sessionStorage.removeItem('loggedIn');
         sessionStorage.removeItem('username');
@@ -53,17 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
   orderTotalEl.textContent = getCartTotal().toFixed(2);
 
   const checkoutForm = document.getElementById('checkout-form');
+
   function displayError(fieldId, message) {
     const errorElement = document.getElementById(fieldId + '-error');
     if (errorElement) {
       errorElement.textContent = message;
-    }
-  }
-
-  function clearError(fieldId) {
-    const errorElement = document.getElementById(fieldId + '-error');
-    if (errorElement) {
-      errorElement.textContent = '';
     }
   }
 
@@ -75,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const cardExpiryInput = document.getElementById('card-expiry');
     cardExpiryInput.addEventListener('input', function () {
-      let v = cardExpiryInput.value.replace(/\D/g, '').slice(0, 4);
+      var v = cardExpiryInput.value.replace(/\D/g, '').slice(0, 4);
       if (v.length >= 3) {
         v = v.slice(0, 2) + '/' + v.slice(2);
       }
@@ -99,19 +92,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function validateForm() {
-    let isValid = true;
-    const errorElements = document.querySelectorAll('.error-message');
+    var isValid = true;
+    var errorElements = document.querySelectorAll('.error-message');
+
     errorElements.forEach(function (el) {
       el.textContent = '';
     });
 
-    const cardName = document.getElementById('card-name').value.trim();
+    var cardName = document.getElementById('card-name').value.trim();
     if (cardName === '') {
       displayError('card-name', 'Name on card is required.');
       isValid = false;
     }
 
-    const cardNumber = document.getElementById('card-number').value.trim();
+    var cardNumber = document.getElementById('card-number').value.trim();
     if (cardNumber === '') {
       displayError('card-number', 'Card number is required.');
       isValid = false;
@@ -120,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
       isValid = false;
     }
 
-    const cardExpiry = document.getElementById('card-expiry').value.trim();
+    var cardExpiry = document.getElementById('card-expiry').value.trim();
     if (cardExpiry === '') {
       displayError('card-expiry', 'Expiry date is required.');
       isValid = false;
@@ -128,18 +122,19 @@ document.addEventListener('DOMContentLoaded', function () {
       displayError('card-expiry', 'Invalid expiry date (MM/YY format).');
       isValid = false;
     } else {
-      const parts = cardExpiry.split('/');
-      const month = parseInt(parts[0], 10);
-      const year = parseInt(parts[1], 10);
-      const currentYear = new Date().getFullYear() % 100;
-      const currentMonth = new Date().getMonth() + 1;
+      var parts = cardExpiry.split('/');
+      var month = parseInt(parts[0], 10);
+      var year = parseInt(parts[1], 10);
+      var now = new Date();
+      var currentYear = now.getFullYear() % 100;
+      var currentMonth = now.getMonth() + 1;
       if (year < currentYear || (year === currentYear && month < currentMonth)) {
         displayError('card-expiry', 'Card has expired.');
         isValid = false;
       }
     }
 
-    const cardCvv = document.getElementById('card-cvv').value.trim();
+    var cardCvv = document.getElementById('card-cvv').value.trim();
     if (cardCvv === '') {
       displayError('card-cvv', 'CVV is required.');
       isValid = false;
@@ -148,37 +143,37 @@ document.addEventListener('DOMContentLoaded', function () {
       isValid = false;
     }
 
-    const shippingCountry = document.getElementById('shipping-country').value.trim();
+    var shippingCountry = document.getElementById('shipping-country').value.trim();
     if (shippingCountry === '') {
       displayError('shipping-country', 'Country is required.');
       isValid = false;
     }
 
-    const address1 = document.getElementById('shipping-address-1').value.trim();
+    var address1 = document.getElementById('shipping-address-1').value.trim();
     if (address1 === '') {
       displayError('shipping-address-1', 'Primary address is required.');
       isValid = false;
     }
 
-    const shippingFirstName = document.getElementById('shipping-first-name').value.trim();
+    var shippingFirstName = document.getElementById('shipping-first-name').value.trim();
     if (shippingFirstName === '') {
       displayError('shipping-first-name', 'First name is required.');
       isValid = false;
     }
 
-    const city = document.getElementById('shipping-city').value.trim();
+    var city = document.getElementById('shipping-city').value.trim();
     if (city === '') {
       displayError('shipping-city', 'City is required.');
       isValid = false;
     }
 
-    const state = document.getElementById('shipping-state-province').value.trim();
+    var state = document.getElementById('shipping-state-province').value.trim();
     if (state === '') {
       displayError('shipping-state-province', 'State/Province is required.');
       isValid = false;
     }
 
-    const shippingZipPostal = document.getElementById('shipping-zip-postal').value.trim();
+    var shippingZipPostal = document.getElementById('shipping-zip-postal').value.trim();
     if (shippingZipPostal === '') {
       displayError('shipping-zip-postal', 'Zip/Postal Code is required.');
       isValid = false;
@@ -187,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function () {
       isValid = false;
     }
 
-    const shippingPhone = document.getElementById('shipping-phone').value.trim();
+    var shippingPhone = document.getElementById('shipping-phone').value.trim();
     if (shippingPhone !== '' && !/^\d{10}$/.test(shippingPhone)) {
       displayError('shipping-phone', 'Invalid Phone Number (e.g., 04XXXXXXXX).');
       isValid = false;
@@ -196,13 +191,21 @@ document.addEventListener('DOMContentLoaded', function () {
     return isValid;
   }
 
-  checkoutForm.addEventListener('submit', async e => {
+  checkoutForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const orderData = {
+    if (!validateForm()) {
+      console.log('Form validation failed.');
+      return;
+    }
+
+    var orderData = {
       name: document.getElementById('shipping-first-name').value + ' ' + document.getElementById('shipping-last-name').value,
       email: document.getElementById('shipping-email')?.value || 'none',
-      address: `${document.getElementById('shipping-address-1').value}, ${document.getElementById('shipping-city').value}, ${document.getElementById('shipping-state-province').value}, ${document.getElementById('shipping-country').value}`,
+      address: document.getElementById('shipping-address-1').value + ', ' +
+               document.getElementById('shipping-city').value + ', ' +
+               document.getElementById('shipping-state-province').value + ', ' +
+               document.getElementById('shipping-country').value,
       cardName: document.getElementById('card-name').value,
       cardNumber: document.getElementById('card-number').value,
       cardExpiry: document.getElementById('card-expiry').value,
@@ -211,34 +214,24 @@ document.addEventListener('DOMContentLoaded', function () {
       total: getCartTotal().toFixed(2)
     };
 
-    const res = await fetch('/api/order', {
+    fetch('/api/order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderData)
+    }).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      if (data.success) {
+        localStorage.removeItem('shopping_cart');
+        window.location.href = 'order.html';
+      } else {
+        alert('Failed to place order. Please try again.');
+      }
+    }).catch(function (error) {
+      alert('An error occurred while placing your order.');
+      console.error(error);
     });
-
-    const data = await res.json();
-    if (data.success) {
-      localStorage.removeItem('shopping_cart');
-      window.location.href = 'order.html';
-    } else {
-      alert('Failed to place order. Please try again.');
-    }
-  })
-
-  //testing purposes
-  function handleCheckoutSubmit(e) {
-    e.preventDefault();
-    if (validateForm()) {
-      localStorage.removeItem('cart');
-      window.location.href = 'order.html';
-
-    } else {
-      console.log('Form validation failed.');
-    }
-  }
+  });
 
   applyInputLimiters();
-  checkoutForm.addEventListener('submit', handleCheckoutSubmit);
 });
-
