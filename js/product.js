@@ -53,7 +53,7 @@ export class Product {
         const addToCartBtn = card.querySelector('.add-to-cart-btn');
         if (isAvailable) {
             addToCartBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent navigation to product detail page
+                e.stopPropagation(); 
                 this.addToCart();
             });
         }
@@ -69,12 +69,10 @@ export class Product {
             return !unavailableTerms.some(term => availabilityLower.includes(term));
         }
         
-        // If no availability info or stock is 0, consider unavailable
         return this.stock > 0;
     }
 
     addToCart(quantity = 1) {
-        //avoid circular dependency
         import('./cartManager.js').then(module => {
             const { addToCart } = module;
             
@@ -88,7 +86,6 @@ export class Product {
             
             addToCart(productData, quantity);
             
-            // Create and show the notification message
             this.showAddedToCartMessage();
         });
     }

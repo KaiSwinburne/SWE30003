@@ -65,10 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const username = sessionStorage.getItem('username');
     
     if (isLoggedIn === 'true' && username) {
-        // User is logged in, replace login button with account image
+        //replace login button with account image
         const loginSection = document.getElementById('login-section');
-        
-        // Create account section with image and username
         loginSection.innerHTML = `
             <div style="display: flex; align-items: center;">
                 <img src="assets/account.png" alt="Account" style="height: 48px; width: auto;">

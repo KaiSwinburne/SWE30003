@@ -1,5 +1,3 @@
-// Handle user data management in CSV file
-
 const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
@@ -7,24 +5,8 @@ const { createObjectCsvWriter } = require('csv-writer');
 
 const usersFilePath = path.join(__dirname, '../database/users.csv');
 
-// Ensure users.csv exists with headers
-function initializeUsersFile() {
-    if (!fs.existsSync(usersFilePath)) {
-        // Create directory if it doesn't exist
-        const dir = path.dirname(usersFilePath);
-        if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir, { recursive: true });
-        }
-        
-        // Create file with headers
-        fs.writeFileSync(usersFilePath, 'id,username,password\n');
-        console.log('Created new users.csv file with headers');
-    }
-}
-
 // Get all users from the CSV file
 function getAllUsers(callback) {
-    initializeUsersFile();
     
     const users = [];
     fs.createReadStream(usersFilePath)

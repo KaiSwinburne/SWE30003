@@ -17,7 +17,6 @@ function isProductAvailable(product) {
 
 // Function to show notification message
 function showAddedToCartMessage(productName, quantity) {
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = 'cart-notification';
     notification.innerHTML = `
