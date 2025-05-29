@@ -2,8 +2,11 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const { getAllProducts, getFeaturedProducts } = require('./catalogueManager');
 const { addUser, verifyUser } = require('./userManager');
+const {createOrder} = require('./orderProcessor');
+const PORT = 3000;
 
 const app = express();
 app.use(cors());
@@ -76,6 +79,16 @@ app.post('/api/users/login', (req, res) => {
     });
 });
 
+// Order Submission API
+app.post('/api/order', (req, res) => {
+    createOrder(req.body,(result) => {
+        if (!result.success){
+            return res.status(400).json(result);
+        }
+        res.json(result);
+    });
+});
+ 
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
