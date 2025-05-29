@@ -35,9 +35,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const cartItemsContainer = document.querySelector('.cart-items');
   const totalEl = document.getElementById('cart-total');
-  const processButton = document.getElementById('checkout-button');
-  const isLoggedIn = sessionStorage.getItem('loggedIn');
-  const username = sessionStorage.getItem('username');
 
   function renderCart() {
     const cart = getCart();
@@ -70,17 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
     totalEl.textContent = getCartTotal().toFixed(2);
   }
 
-
-  if(isLoggedIn === null){
-      processButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            showMustLoginMessage();
-        });
-  }
-
-
   cartItemsContainer.addEventListener('input', function (e) {
-
     if (e.target.type === 'number') {
       const id = e.target.getAttribute('data-id');
       const qty = parseInt(e.target.value);
@@ -112,53 +99,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
   renderCart();
 });
-
-
-function showMustLoginMessage(){
-  // Create notification element
-        const notification = document.createElement('div');
-        notification.className = 'cart-notification';
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fa-solid fa-circle-xmark"></i>
-                <span>You must have an account to place an order</span>
-            </div>
-        `;
-        
-        // Add styles
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.right = '20px';
-        notification.style.backgroundColor = '#BD432E';
-        notification.style.color = 'white';
-        notification.style.padding = '12px 20px';
-        notification.style.borderRadius = '4px';
-        notification.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
-        notification.style.zIndex = '1000';
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateY(20px)';
-        notification.style.transition = 'all 0.3s ease';
-        
-        const content = notification.querySelector('.notification-content');
-        content.style.display = 'flex';
-        content.style.alignItems = 'center';
-        content.style.gap = '10px';
-        
-        document.body.appendChild(notification);
-        
-        // Trigger animation
-        setTimeout(() => {
-            notification.style.opacity = '1';
-            notification.style.transform = 'translateY(0)';
-        }, 10);
-        
-        // Remove after 3 seconds
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 3000);
-}

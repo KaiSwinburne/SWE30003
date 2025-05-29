@@ -10,7 +10,7 @@ export class Product {
         this.size = data.Size;
         this.availability = data.Availability;
         this.ratings = data.Ratings;
-        this.imageURL = data.imageURLs;
+        this.imageURL = data.imageURLs || '../assets/default.jpg';
         this.featured = data.Featured;
     }
     
@@ -27,7 +27,7 @@ export class Product {
             <div class="desc">
                 <span>${this.brand}</span>
                 <h5>${this.name}</h5>
-                <h4>$${this.price}</h4>
+                <h4>${this.price}</h4>
                 <p>Ratings: ${this.ratings} <i class="fa-solid fa-star" style="color:rgb(255, 221, 0);"></i></p>
                 <p class="availability">${this.availability}</p>
             </div>
@@ -64,6 +64,7 @@ export class Product {
     isAvailable() {
         const unavailableTerms = ['discontinued', 'out of stock', 'sold out', 'unavailable'];
         
+        // Check if availability contains any of the unavailable terms (case insensitive)
         if (this.availability) {
             const availabilityLower = this.availability.toLowerCase();
             return !unavailableTerms.some(term => availabilityLower.includes(term));
@@ -74,7 +75,7 @@ export class Product {
     }
 
     addToCart(quantity = 1) {
-        //avoid circular dependency
+        // Import here to avoid circular dependency
         import('./cartManager.js').then(module => {
             const { addToCart } = module;
             
@@ -104,7 +105,7 @@ export class Product {
             </div>
         `;
         
-        // Add styles
+        // Add styles to the notification
         notification.style.position = 'fixed';
         notification.style.bottom = '20px';
         notification.style.right = '20px';
@@ -118,12 +119,13 @@ export class Product {
         notification.style.transform = 'translateY(20px)';
         notification.style.transition = 'all 0.3s ease';
         
+        // Add styles to the content
         const content = notification.querySelector('.notification-content');
         content.style.display = 'flex';
         content.style.alignItems = 'center';
         content.style.gap = '10px';
         
-
+        // Add to the DOM
         document.body.appendChild(notification);
         
         // Trigger animation
@@ -137,13 +139,14 @@ export class Product {
             notification.style.opacity = '0';
             notification.style.transform = 'translateY(20px)';
             
+            // Remove from DOM after animation completes
             setTimeout(() => {
                 document.body.removeChild(notification);
             }, 300);
         }, 3000);
     }
 
-    //testing
+    //testing purposes
     showDetails(){
         alert(`${this.name}\n${this.description}\n$${this.price}`);
     }

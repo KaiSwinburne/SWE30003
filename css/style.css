@@ -112,43 +112,32 @@ p {
     color: rgb(240, 188, 33);
 }
 
-/* Featured and All section*/
-#featured,
-#all{
+/* Featured */
+#featured{
     padding-top: 50px;
     padding-left: 80px;
     padding-right: 80px;
     text-align: center;
 }
 
-#all{
-    padding-left: 200px;
-    padding-right: 200px;
-}
-
-#featured h1,
-#all h1{
+#featured h1{
     font-size: 3.5vw;
 }
 
-#featured p,
-#all p{
+#featured p{
     font-size: 1.5vw;
 }
 
-#featured .product:hover,
-#all .product:hover{
+#featured .product:hover{
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.06);
 }
 
-#featured .product img,
-#all .product img{
+#featured .product img{
     width: 100%;
     border-radius: 20px;
 }
 
-#featured .product .desc,
-#all .product .desc{
+#featured .product .desc{
     flex-grow: 1;
     text-align: start;
     padding: 10px 0;
@@ -161,22 +150,19 @@ p {
     scroll-behavior: smooth;
     gap: 5em;
     padding: 1em 0;
+    /* white-space: nowrap; Removing this property from the container is generally good practice
+       if you want content within the cards to wrap, but in this specific case,
+       it refers to the product cards themselves, not the button text inside.
+       The crucial changes are in .product and button. */
 }
 
-#all .all-products-container{
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 1em;
-    flex-wrap: wrap;
-}
-
-#featured .product,
-#all .product{
+#featured .product{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 0 0 auto;
-    width: 250px; 
+    /* Increase the width of the product card */
+    width: 250px; /* Increased from 200px. You might need to experiment with this value. */
     max-width: 100%;
     padding: 10px 20px;
     border: 2px solid #ababab;
@@ -184,17 +170,14 @@ p {
     cursor: pointer;
 }
 
-#all .product{
-    margin-top: 1em;
-}
-
-#featured .product button,
-#all .product button{
+#featured .product button{
     color: rgb(255, 255, 255);
     padding: 10px 20px;
-    font-size: 18px; 
+    /* Reduce the font size for the button text */
+    font-size: 18px; /* Reduced from 30px. This is the main culprit. */
+    /* Add white-space: normal to allow text to wrap if it's still too long */
     white-space: normal;
-    text-align: center; 
+    text-align: center; /* Center the text within the button */
     background-color: rgb(0, 0, 0);
     text-decoration: none;
     background-repeat: no-repeat;
@@ -202,19 +185,16 @@ p {
     transition: all 0.2s ease;
 }
 
-#featured .product button:hover,
-#all .product button:hover {
+#featured .product button:hover {
     background-color: rgb(79, 79, 79);
 }
 
-#featured .product .desc span,
-#all .product .desc span{
+#featured .product .desc span{
     font-size: 18px;
     color: rgb(93, 93, 93);
 }
 
-#featured .product .desc h5,
-#all .product .desc h5{
+#featured .product .desc h5{
     word-break: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -223,31 +203,12 @@ p {
     padding: 10px 10px 0 0;
 }
 
-#featured .product .desc h4,
-#all .product .desc h4{
+#featured .product .desc h4{
     color: rgb(0, 0, 0);
 }
 
-#featured .product .desc p,
-#all .product .desc p {
+#featured .product .desc p {
     font-size: 18px;
-}
-
-#all .filter-section{
-    display: flex;
-    justify-content: space-evenly;
-    flex-grow: 1;
-    text-align: start;
-    padding: 10px 0;
-    margin-bottom: 10px;
-    margin-top: 10px;
-}
-
-#all .filter-section #product-search{
-    padding: 10px 0 10px 0;
-    width: 50%;
-    font-size: 1.2rem;
-    border-radius: 4px;
 }
 
 /* single product */
@@ -534,78 +495,4 @@ label {
     #account-section form {
         width: 90%;
     }
-}
-
-/*login page*/
- /* Clean, centered login form styling */
-.login-container {
-    display: flex;
-    justify-content: center;
-    padding: 40px 0;
-    gap: 40px;
-    flex-wrap: wrap;
-}
-
-.form-card {
-    border: 1px solid #ddd;
-    padding: 30px;
-    width: 400px;
-    text-align: center;
-}
-
-.form-card h2 {
-    font-size: 36px;
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    font-size: 20px;
-    margin-bottom: 8px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    font-size: 18px;
-    border: 1px solid #ddd;
-}
-
-button.auth-button {
-    background-color: #000;
-    color: #fff;
-    border: none;
-    padding: 15px 0;
-    font-size: 20px;
-    width: 100%;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button.auth-button:hover {
-    background-color: #333;
-}
-
-.message {
-    margin-top: 20px;
-    font-size: 16px;
-}
-
-/*footer*/
-footer {
-    text-align: center;
-    padding: 30px;
-    background-color: #000;
-    color: white;
-    margin-top: 50px;
-}
-
-footer p {
-    margin: 10px 0;
-    color: white;
 }

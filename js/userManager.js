@@ -1,4 +1,4 @@
-// Handle user data management in CSV file
+// userManager.js - Handle user data management in CSV file
 
 const fs = require('fs');
 const path = require('path');
@@ -17,7 +17,7 @@ function initializeUsersFile() {
         }
         
         // Create file with headers
-        fs.writeFileSync(usersFilePath, 'id,username,password\n');
+        fs.writeFileSync(usersFilePath, 'username,password\n');
         console.log('Created new users.csv file with headers');
     }
 }
@@ -30,7 +30,6 @@ function getAllUsers(callback) {
     fs.createReadStream(usersFilePath)
         .pipe(csv())
         .on('data', (row) => {
-            row.id = parseInt(row.id)
             users.push(row);
         })
         .on('end', () => {
@@ -59,17 +58,13 @@ function addUser(username, password, callback) {
         }
 
         getAllUsers((users) => {
-            const maxID = users.reduce((max, user) => Math.max(max, user.id || 0), 0);
-            const currentID = maxID + 1;
-
             // Add the new user
-            users.push({id: currentID, username, password });
+            users.push({ username, password });
             
             // Write back to CSV
             const csvWriter = createObjectCsvWriter({
                 path: usersFilePath,
                 header: [
-                    { id: 'id', title: 'id' },
                     { id: 'username', title: 'username' },
                     { id: 'password', title: 'password' }
                 ]
