@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetch(`http://localhost:3000/api/product/${productId}`)
-        .then(res => res.json()) //get data from server
+        .then(res => res.json())
         .then(productData => {
             const product = new Product(productData);
             const imgContainer = document.querySelector('.single-product-img');
@@ -117,7 +117,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     const quantity = parseInt(quantityInput.value);
                     
                     if (quantity > 0 && quantity <= product.stock) {
-                        // Convert product to the format expected by addToCart
                         const productData = {
                             ID: product.id,
                             Name: product.name,
