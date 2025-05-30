@@ -17,15 +17,17 @@ export class Order{
         orderSummary.className = 'order-summary';
 
         orderSummary.innerHTML = `
-            <h2>Order Summary</h2>
-            <p><strong>Name:</strong> ${this.name}</p>
-            <p><strong>Email:</strong> ${this.email}</p>
-            <p><strong>Address:</strong> ${this.address}</p>
-            <p><strong>Total:</strong> $${this.total.toFixed(2)}</p>
-            <h3>Items:</h3>
-            <ul>
-                ${this.items.map(item => `<li>${item.name} (x${item.quantity})</li>`).join('')}
-            </ul>
+            <div class="desc">
+                <h2>Order Summary</h2>
+                <p><strong>Name:</strong> ${this.name}</p>
+                <p><strong>Email:</strong> ${this.email}</p>
+                <p><strong>Address:</strong> ${this.address}</p>
+                <p><strong>Total:</strong> $${this.total.toFixed(2)}</p>
+                <h3>Items:</h3>
+                <ul>
+                    ${this.items.map(item => `<li>${item.name} (x${item.quantity})</li>`).join('')}
+                </ul>
+            </div>
         `;
 
         return orderSummary;

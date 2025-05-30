@@ -35,4 +35,10 @@ export class User{
         
         return userCard;
     }
+
+    //testing
+    showUserInfo() {
+        console.log(`User ID: ${this.id}`);
+        console.log(`Username: ${this.username}`);
+    }   
 }
