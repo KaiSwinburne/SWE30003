@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 
 
-const orderFilePath = path.join(__dirname, '../database/orders.csv');
+const orderFilePath = path.join(__dirname, './database/orders.csv');
 
 if (!fs.existsSync(orderFilePath)) {
   fs.mkdirSync(path.dirname(orderFilePath), { recursive: true });

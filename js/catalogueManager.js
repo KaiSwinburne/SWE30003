@@ -7,7 +7,7 @@ let productList = [];
 //load product lists from csv and store in memory
 function loadproducts(){
     const results = [];
-    const filePath = path.resolve(__dirname, '../database/products.csv');
+    const filePath = path.resolve(__dirname, './database/products.csv');
 
     fs.createReadStream(filePath)
         .pipe(csv())

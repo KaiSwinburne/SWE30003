@@ -23,7 +23,7 @@ export class Product {
 
         card.innerHTML = 
         `
-            <img src="../assets/${this.imageURL}" alt="${this.name}">
+            <img src="./assets/${this.imageURL}" alt="${this.name}">
             <div class="desc">
                 <span>${this.brand}</span>
                 <h5>${this.name}</h5>

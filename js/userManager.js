@@ -3,7 +3,7 @@ const path = require('path');
 const csv = require('csv-parser');
 const { createObjectCsvWriter } = require('csv-writer');
 
-const usersFilePath = path.join(__dirname, '../database/users.csv');
+const usersFilePath = path.join(__dirname, './database/users.csv');
 
 // Get all users from the CSV file
 function getAllUsers(callback) {

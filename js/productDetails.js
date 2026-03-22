@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             //image preview
             imgContainer.innerHTML = `
-                <img src="../assets/${product.imageURL}" alt="${product.name}" id="main-img">
+                <img src="./assets/${product.imageURL}" alt="${product.name}" id="main-img">
             `;
             
             //product description
